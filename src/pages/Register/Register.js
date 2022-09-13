@@ -34,7 +34,7 @@ const Register = () => {
         } else if (password.length < 6) {
             setErrors((prev) => { return ({ ...prev, password: 'Password must be of minimum 6 characters' }) })
         }
-        
+
         if (!password2 && (signup)) {
             setErrors((prev) => { return ({ ...prev, password2: 'Password is required' }) })
         } else if (password2 !== password && (signup)) {
@@ -42,49 +42,49 @@ const Register = () => {
         }
     }
     const [didMount, setDidMount] = useState(false)
-    const { changeLogin,changeName,changeBio } = useContext(AppContext)
+    const { changeLogin, changeName, changeBio } = useContext(AppContext)
     useEffect(() => { setDidMount(true) }, [])
-    const signUp=async()=>{
+    const signUp = async () => {
         setLoading(true)
-        const res=await fetch("https://news-app-backendd.herokuapp.com/signup",{
+        const res = await fetch("https://news-app-backend-shubham.herokuapp.com/signup", {
             headers: {
                 'Content-Type': 'application/json'
-              },
-            method:'POST',
-            body:JSON.stringify({firstName: form.firstName, lastName: form.lastName, password: form.password,  email: form.email})
+            },
+            method: 'POST',
+            body: JSON.stringify({ firstName: form.firstName, lastName: form.lastName, password: form.password, email: form.email })
         })
-        const result=await res.json()
+        const result = await res.json()
         if (!result.token) {
-            setErrors({password2:result.message})
+            setErrors({ password2: result.message })
         }
-        else{
-            localStorage.setItem('token',result?.token)
-            localStorage.setItem('name',result?.name)
-            localStorage.setItem('bio',result?.bio)
+        else {
+            localStorage.setItem('token', result?.token)
+            localStorage.setItem('name', result?.name)
+            localStorage.setItem('bio', result?.bio)
             changeBio(result?.bio)
             changeName(result?.name)
             changeLogin(true)
         }
         setLoading(false)
     }
-    const signIn=async()=>{
+    const signIn = async () => {
         setLoading(true)
-        const res=await fetch("https://news-app-backendd.herokuapp.com/signin",{
+        const res = await fetch("https://news-app-backend-shubham.herokuapp.com/signin", {
             headers: {
                 'Content-Type': 'application/json'
             },
-            method:'POST',
-            body:JSON.stringify({ password: form.password,  email: form.email})
+            method: 'POST',
+            body: JSON.stringify({ password: form.password, email: form.email })
         })
-        const result=await res.json()
+        const result = await res.json()
         if (!result.token) {
-            setErrors({password:result.message})
+            setErrors({ password: result.message })
         }
-        else{
+        else {
             // console.log(result);
-            localStorage.setItem('token',result?.token)
-            localStorage.setItem('name',result?.name)
-            localStorage.setItem('bio',result?.bio)
+            localStorage.setItem('token', result?.token)
+            localStorage.setItem('name', result?.name)
+            localStorage.setItem('bio', result?.bio)
             changeBio(result?.bio)
             changeName(result?.name)
             changeLogin(true)
@@ -92,13 +92,13 @@ const Register = () => {
         setLoading(false)
     }
     useEffect(() => {
-        if(didMount&&!errors&&signup){
+        if (didMount && !errors && signup) {
             signUp()
         }
-        if(didMount&&!errors&&!signup){
+        if (didMount && !errors && !signup) {
             signIn()
         }
-    }, [errors,click])
+    }, [errors, click])
     return (
 
         <div className={classes.cover}>
@@ -143,11 +143,11 @@ const Register = () => {
                             </Typography> </>
                     }
 
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.button}  onClick={()=>{setClick(prev=>prev+1)}} disabled={loading}
+                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.button} onClick={() => { setClick(prev => prev + 1) }} disabled={loading}
                     >
-                        {loading?'Please Wait...':(signup ? "SIGN UP" : "LOGIN")}
+                        {loading ? 'Please Wait...' : (signup ? "SIGN UP" : "LOGIN")}
                     </Button>
-                    <Link href="#" variant="body2" component="div" align="center" className={classes.link} onClick={() => { setSignup((prev) => { return (!prev) });setErrors({}) ; setForm({ firstName: '', lastName: '', password: '', password2: '', email: '' }) }}>
+                    <Link href="#" variant="body2" component="div" align="center" className={classes.link} onClick={() => { setSignup((prev) => { return (!prev) }); setErrors({}); setForm({ firstName: '', lastName: '', password: '', password2: '', email: '' }) }}>
                         {signup ? "Already have an account? Login" : "Don't have an account? Sign Up"}
                     </Link>
 
