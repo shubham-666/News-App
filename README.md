@@ -17,6 +17,6 @@ Material UI is used for styling
 4.  After previous step has completed installing all dependencies run command `npm start`
 
 
-Live[Demo](https://news-app-shubham.netlify.app/home)
+Live[Demo](https://news-app-shubham.netlify.app/)
 
 
