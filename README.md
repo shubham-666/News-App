@@ -16,6 +16,6 @@ Material UI is used for styling
 3.  After cloning the repository open it in terminal and run command `npm install`
 4.  After previous step has completed installing all dependencies run command `npm start`
 
-   Live[Demo](https://news-app-shubham.netlify.app/)
+    Live[Demo](https://news-app-shubham.netlify.app/)
 
 
